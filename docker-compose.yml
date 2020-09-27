@@ -1,15 +1,15 @@
-version: "3.8"
+version: "3.3"
 
 services: 
     db:
-        image: postgres
+        image: postgres:10
         environment:
             - POSTGRES_DB=postgres
             - POSTGRES_USER=test
             - POSTGRES_PASSWORD=1234test
     web:
         build: .
-        command: python manage.py runserver 127.0.0.1:8000
+        command: python manage.py runserver 0.0.0.0:8000
         volumes: 
             - .:/code
         ports: 
