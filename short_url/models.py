@@ -2,6 +2,7 @@ from django.db import models
 
 from hashlib import md5
 
+
 class URL(models.Model):
     base_url = models.URLField(unique=True)
     hash_url = models.URLField(unique=True)
@@ -13,9 +14,6 @@ class URL(models.Model):
         self.save()
 
     def save(self, *args, **kwargs):
-        if not self.id:
-            self.hash_url = md5(self.base_url.encode()).hexdigest()[:10]
-
         return super().save(*args, **kwargs)
 
     def __repr__(self):
