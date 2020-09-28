@@ -54,36 +54,6 @@ class GPURLsViewTest(TestCase):
         response = self.client.get('/')
         self.assertEqual(response.data, [])
 
-    def test_one_url(self):
-        self.url = URL(
-            base_url='https://www.pinterest.ru/pin/755901118684940658/'
-        )
-        self.url.save()
-        response = self.client.get('/')
-        self.assertEqual(response.data, [OrderedDict(
-            [('id', 1), ('base_url', 'https://www.pinterest.ru/pin/755901118684940658/')]
-        )])
-
-    def test_two_url(self):
-        self.url_1 = URL(
-            base_url='https://www.pinterest.ru/pin/755901118684940658/'
-        )
-        self.url_1.save()
-        self.url_2 = URL(
-            base_url='https://www.youtube.com/watch?v=8YWTW9YLJW0'
-        )
-        self.url_2.save()
-        response = self.client.get('/')
-        self.assertEqual(response.data, [
-            OrderedDict(
-                [('id', 1), ('base_url', 'https://www.pinterest.ru/pin/755901118684940658/')]
-            ),
-            OrderedDict(
-                [('id', 2), ('base_url', 'https://www.youtube.com/watch?v=8YWTW9YLJW0')]
-            ),
-        ]
-        )
-
     def test_true_full_url(self):
         response = self.client.post(
             '', {'base_url': 'http://mapandwordsstartingwithj.appspot.com/index.php?a=jrek'})
