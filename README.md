@@ -67,10 +67,12 @@ curl -X POST -d base_url="https://github.com/avito-tech/auto-backend-trainee-ass
 
 - \$curl -X DELETE http://0.0.0.0:8000/avito-auto-be
 
-#### Изменить сокращенный URL на кастомный или рандомный:
+#### Изменить сокращенный URL на кастомный или :
 
 1. - \$curl -X PUT -d hash_url="avito-auto" http://0.0.0.0:8000/avito-auto-be
+2. - \$curl -X PUT -d hash_url="" http://0.0.0.0:8000/avito
 
 ##### Pезультат:
 
-- http://0.0.0.0:8000/avito-auto
+1. - http://0.0.0.0:8000/avito-auto
+2. - http://0.0.0.0:8000/3743ad5ae2

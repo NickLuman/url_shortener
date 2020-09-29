@@ -14,6 +14,9 @@ from django.views.decorators.csrf import csrf_exempt
 from hashlib import md5
 from copy import copy
 
+import random
+import string
+
 
 @csrf_exempt
 @api_view(['GET', 'DELETE', 'PUT'])
@@ -28,14 +31,14 @@ def get_delete_update_url(request, hash_url):
         url_object.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     elif request.method == 'PUT':
-        # base_url = copy(url_object.base_url)
+        request_hash_url = request.data.get('hash_url')        
 
-        # if not request.data['hash_url']:
-        #     request.data['hash_url'] = md5(
-        #         base_url.encode()).hexdigest()[:10]
+        if not request.data['hash_url']:
+            request_hash_url = md5(
+                url_object.base_url.encode()).hexdigest()[:10]
 
         url_object.hash_url = '/'.join(url_object.hash_url.split('/')
-                                       [:-1] + ['']) + request.data['hash_url']
+                                       [:-1] + ['']) + request_hash_url
         data = {
             'base_url': url_object.base_url,
             'hash_url': url_object.hash_url,
